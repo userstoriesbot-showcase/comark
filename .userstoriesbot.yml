@@ -1,0 +1,14 @@
+# Showcase fork only (never part of an upstream pull request).
+version: 1
+app:
+  install: "corepack enable && pnpm install"
+  start: pnpm --dir examples/2.vite/angular exec vite --port {port} --host 0.0.0.0
+  url: http://localhost:{port}
+  readyPath: /
+  readyStatus: 200
+  runtime: node24
+  env:
+    NODE_ENV: development
+demo:
+  maxVideos: 1
+  beforePass: true

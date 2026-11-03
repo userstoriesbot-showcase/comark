@@ -66,5 +66,15 @@ export default defineConfig({
       transformFilter: (_code, id) => !id.includes('/define.ts'),
     }),
     tailwindcss(),
+    // Demo-only: @analogjs/vite-plugin-angular 3.0.0-beta.18 no longer reads the
+    // `transformFilter` option above; it takes filters from `analog.setup()` instead.
+    {
+      name: 'comark:fast-compile-skip-define',
+      analog: {
+        setup(ctx: { registerTransformFilter(filter: (code: string, id: string) => boolean): void }) {
+          ctx.registerTransformFilter((_code, id) => !id.includes('/define.ts'))
+        },
+      },
+    } as Plugin,
   ],
 })
